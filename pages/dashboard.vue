@@ -20,7 +20,7 @@
           Hello {{ auth?.user.name.split(' ')[0] }} 👋🏾
         </h1>
       </div>
-      <Stats v-bind="{ stats }" />
+      <Stats v-if="false" v-bind="{ stats }" />
       <div class="flex flex-col space-y-3 rounded-lg bg-white p-4 shadow-sm">
         <div class="flex justify-between">
           <h3 class="text-lg font-semibold text-gray-600">IP Portfolios</h3>
