@@ -17,6 +17,7 @@
   "dependencies": {
     "@floating-ui/dom": "^1.0.1",
     "@headlessui/vue": "^1.6.7",
+    "@vueuse/core": "^9.13.0",
     "chart.js": "^4.2.1",
     "dayjs": "^1.11.5",
     "ohmyfetch": "^0.4.21"

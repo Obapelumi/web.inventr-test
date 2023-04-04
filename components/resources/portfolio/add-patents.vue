@@ -94,6 +94,7 @@ import {
   Patent,
   EpoSearchParams
 } from '~~/composables/resources/portfolio'
+import { useDebounceFn } from '@vueuse/core'
 
 // defines
 const emit = defineEmits(['canceled', 'saved'])
@@ -120,7 +121,7 @@ const savedPatents = ref(new Set())
 
 // methods
 const { addToast } = useToast()
-const searchPatents = useDebounce(
+const searchPatents = useDebounceFn(
   async (text: string, searchBy: EpoSearchParams[]) => {
     if (!text || searchBy.length < 1) {
       searchResults.value = []
@@ -138,7 +139,7 @@ const searchPatents = useDebounce(
       searching.value = false
     }
   },
-  200
+  500
 )
 
 const savePatent = async (patentNumber: string) => {
