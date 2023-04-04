@@ -1,72 +1,70 @@
 <template>
-  <TeleportWrapper to="body">
-    <TransitionRoot appear :show="open" as="template">
-      <Dialog as="div" @close="autoClose" class="relative z-30">
-        <TransitionChild
-          as="template"
-          enter="duration-300 ease-out"
-          enter-from="opacity-0"
-          enter-to="opacity-100"
-          leave="duration-200 ease-in"
-          leave-from="opacity-100"
-          leave-to="opacity-0"
+  <TransitionRoot appear :show="open" as="template">
+    <Dialog as="div" @close="autoClose" class="relative z-30">
+      <TransitionChild
+        as="template"
+        enter="duration-300 ease-out"
+        enter-from="opacity-0"
+        enter-to="opacity-100"
+        leave="duration-200 ease-in"
+        leave-from="opacity-100"
+        leave-to="opacity-0"
+      >
+        <div
+          class="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm"
+        ></div>
+      </TransitionChild>
+
+      <TransitionChild as="template" v-bind="transition">
+        <DialogPanel
+          :class="[
+            'fixed flex h-screen transform flex-col overflow-auto bg-white shadow-xl transition-all',
+            position
+          ]"
+          v-bind="$attrs"
         >
-          <div
-            class="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm"
-          ></div>
-        </TransitionChild>
-
-        <TransitionChild as="template" v-bind="transition">
-          <DialogPanel
-            :class="[
-              'fixed flex h-screen transform flex-col overflow-auto bg-white shadow-xl transition-all',
-              position
-            ]"
-            v-bind="$attrs"
+          <DialogTitle
+            as="div"
+            class="relative flex flex-col p-5 text-gray-900 sm:pl-8"
           >
-            <DialogTitle
-              as="div"
-              class="relative flex flex-col p-5 text-gray-900 sm:pl-8"
+            <button
+              @click="emit('close')"
+              class="hover:bg-primary-50 hover:text-primary-500 !absolute right-6 top-6 box-border flex justify-end rounded-full p-1 text-gray-600 transition focus:outline-none"
+              type="button"
+              tooltip="Close"
             >
-              <button
-                @click="emit('close')"
-                class="hover:bg-primary-50 hover:text-primary-500 !absolute right-6 top-6 box-border flex justify-end rounded-full p-1 text-gray-600 transition focus:outline-none"
-                type="button"
-                tooltip="Close"
-              >
-                <Icon name="x" class="h-4 w-4" />
-              </button>
-              <slot name="title">
-                <div id="slideModalHeader" class="contents">
-                  <div class="contents" v-if="title">
-                    <h3 class="max-w-md text-xl font-semibold tracking-wide">
-                      {{ title }}
-                    </h3>
-                    <Title>{{ title }} · Inventr</Title>
-                  </div>
+              <Icon name="x" class="h-4 w-4" />
+            </button>
+            <slot name="title">
+              <div id="slideModalHeader" class="contents">
+                <div class="contents" v-if="title">
+                  <h3 class="max-w-md text-xl font-semibold tracking-wide">
+                    {{ title }}
+                  </h3>
+                  <Title>{{ title }} · Inventr</Title>
                 </div>
-              </slot>
-            </DialogTitle>
-            <DialogDescription as="div" class="h-full">
-              <slot>
-                <div class="mt-2" v-if="description">
-                  <p class="text-sm text-gray-500">
-                    {{ description }}
-                  </p>
-                </div>
+              </div>
+            </slot>
+          </DialogTitle>
+          <DialogDescription as="div" class="h-full">
+            <slot>
+              <div class="mt-2" v-if="description">
+                <p class="text-sm text-gray-500">
+                  {{ description }}
+                </p>
+              </div>
 
-                <div class="mt-4" v-if="buttonText">
-                  <button type="button" class="Btn" @click="emit('confirm')">
-                    {{ buttonText }}
-                  </button>
-                </div>
-              </slot>
-            </DialogDescription>
-          </DialogPanel>
-        </TransitionChild>
-      </Dialog>
-    </TransitionRoot>
-  </TeleportWrapper>
+              <div class="mt-4" v-if="buttonText">
+                <button type="button" class="Btn" @click="emit('confirm')">
+                  {{ buttonText }}
+                </button>
+              </div>
+            </slot>
+          </DialogDescription>
+        </DialogPanel>
+      </TransitionChild>
+    </Dialog>
+  </TransitionRoot>
 </template>
 
 <script setup lang="ts">
@@ -79,7 +77,6 @@ import {
   DialogDescription
 } from '@headlessui/vue'
 import Icon from './icon.vue'
-import TeleportWrapper from './teleport-wrapper.vue'
 
 // defines
 const props = defineProps<{
