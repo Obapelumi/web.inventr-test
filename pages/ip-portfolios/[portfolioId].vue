@@ -2,12 +2,10 @@
   <div class="contents">
     <LoadingPage v-if="pending" />
     <div v-else-if="portfolio" class="flex w-full flex-col space-y-4">
+      <h1 class="text-xl font-semibold text-gray-600">
+        {{ portfolio.name }}
+      </h1>
       <Stats v-bind="{ stats }" />
-      <div class="pb-4">
-        <h1 class="text-xl font-semibold text-gray-600">
-          {{ portfolio.name }}
-        </h1>
-      </div>
       <div class="flex flex-col space-y-3 rounded-lg bg-white p-4 shadow-sm">
         <div class="flex justify-between">
           <h3 class="text-lg font-semibold text-gray-600">Patents</h3>
