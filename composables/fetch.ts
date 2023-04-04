@@ -16,10 +16,10 @@ export type ApiShow<T> = { data: T }
 export type ApiError = { message: string; rule?: string; field?: string }
 
 export const apiFetch: $Fetch = (request, opts) => {
-  const config = useRuntimeConfig()
+  // const config = useRuntimeConfig()
   const token = useCookie('token').value
   return $fetch(request, {
-    baseURL: config.public.apiBaseUrl,
+    baseURL: process.env.API_BASE_URL,
     ...opts,
     headers: {
       Authorization: `Bearer ${token}`
