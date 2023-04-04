@@ -1,0 +1,30 @@
+{
+  "name": "web.inventr",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "PORT=3535 nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^6.6.5",
+    "nuxt": "3.0.0",
+    "prettier": "^2.8.7",
+    "prettier-plugin-tailwindcss": "^0.2.6"
+  },
+  "dependencies": {
+    "@floating-ui/dom": "^1.0.1",
+    "@headlessui/vue": "^1.6.7",
+    "chart.js": "^4.2.1",
+    "dayjs": "^1.11.5",
+    "ohmyfetch": "^0.4.21"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "none",
+    "semi": false
+  }
+}
