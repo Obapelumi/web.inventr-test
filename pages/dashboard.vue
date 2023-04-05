@@ -20,7 +20,7 @@
           Hello {{ auth?.user.name.split(' ')[0] }} 👋🏾
         </h1>
       </div>
-      <Stats v-if="false" v-bind="{ stats }" />
+      <Stats v-if="stats.length > 0" v-bind="{ stats }" />
       <div class="flex flex-col space-y-3 rounded-lg bg-white p-4 shadow-sm">
         <div class="flex justify-between">
           <h3 class="text-lg font-semibold text-gray-600">IP Portfolios</h3>
@@ -99,9 +99,10 @@ import VTable, { TableRow } from '~~/components/table/v-table.vue'
 import Empty from '~~/components/ui/empty.vue'
 import Icon from '~~/components/ui/icon.vue'
 import LoadingPage from '~~/components/ui/loading-page.vue'
-import { ApiList } from '~~/composables/fetch'
+import { ApiList, ApiShow } from '~~/composables/fetch'
 import { Auth } from '~~/composables/resources/auth'
-import { IpPortfolio } from '~~/composables/resources/portfolio'
+import { Stat } from '~~/composables/resources/base'
+import { Company, IpPortfolio } from '~~/composables/resources/portfolio'
 
 // defines
 definePageMeta({ layout: 'dashboard' })
@@ -117,34 +118,54 @@ const {
   params: { 'sums[]': ['patentCosts.amount'], 'counts[]': ['patents'] },
   group: 'ip-portfolios'
 }))
+const companyId = auth?.value.user.company?.id
+const {
+  data: companyData,
+  // refresh: refreshCompany,
+  pending: companyPending
+} = useApiFetch<ApiShow<Company>>(`companies/${companyId}`, () => ({
+  params: {
+    'sums[]': ['patentCosts.amount', 'ipPortfolios.budget'],
+    'counts[]': ['patents']
+  },
+  group: `companies/${companyId}`
+}))
 const openAddPortfolio = ref(false)
 
-const stats = computed(() => {
-  const meta = auth?.value?.user.company?.meta
+const stats = computed<Stat[]>(() => {
+  const meta = companyData.value?.data?.meta
+  if (!meta) return []
+  const budgetSum = meta.ipPortfoliosBudgetSum ?? 0
+  const amountLeft = budgetSum - (meta.patentCostsAmountSum ?? 0)
+  const percentageLeft = (amountLeft / budgetSum || 1) * 100
   return [
-    { title: 'Number of Patents', value: meta?.patentsCount },
+    { title: 'Number of Patents', value: meta.patentsCount },
     {
       title: 'Total Budget',
       value: toMoney({
-        amount: meta?.ipPortfoliosBudgetSum ?? 0,
+        amount: meta.ipPortfoliosBudgetSum ?? 0,
         currency: 'USD'
       })
     },
     {
       title: 'Total Costs',
       value: toMoney({
-        amount: meta?.patentCostsAmountSum ?? 0,
+        amount: meta.patentCostsAmountSum ?? 0,
         currency: 'USD'
       })
     },
     {
       title: 'Amount Left',
       value: toMoney({
-        amount:
-          (meta?.ipPortfoliosBudgetSum ?? 0) -
-          (meta?.patentCostsAmountSum ?? 0),
+        amount: amountLeft,
         currency: 'USD'
-      })
+      }),
+      type:
+        percentageLeft > 50
+          ? 'success'
+          : percentageLeft > 20
+          ? 'warning'
+          : 'error'
     }
   ]
 })

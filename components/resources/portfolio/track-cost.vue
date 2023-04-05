@@ -59,11 +59,13 @@
 </template>
 
 <script setup lang="ts">
+import { ComputedRef } from 'vue'
 import Btn from '~~/components/input/btn.vue'
 import VInput from '~~/components/input/v-input.vue'
 import VSelect from '~~/components/input/v-select.vue'
 import PopUp from '~~/components/ui/pop-up.vue'
 import { ApiShow } from '~~/composables/fetch'
+import { Auth } from '~~/composables/resources/auth'
 import { PatentCost, PatentCostType } from '~~/composables/resources/portfolio'
 
 // defines
@@ -72,8 +74,10 @@ defineProps<{ open: boolean }>()
 
 // refs
 const route = useRoute()
+const auth = inject<ComputedRef<Auth>>('auth')
 const patentId = route.params.patentId
 const portfolioId = route.params.portfolioId
+const companyId = auth?.value.user.company?.id
 const loading = ref('')
 const locations = ['US', 'EUR'] as const
 type Location = (typeof locations)[number]
@@ -104,7 +108,8 @@ const handleSubmit = async () => {
     refreshGroups([
       `patents/${portfolioId}`,
       `ip-portfolios/${portfolioId}`,
-      'ip-portfolios'
+      'ip-portfolios',
+      `companies/${companyId}`
     ])
     emit('done')
   } catch (error) {
