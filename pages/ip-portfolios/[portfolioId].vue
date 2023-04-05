@@ -17,7 +17,7 @@
             <Icon name="plus-circle" class="mr-2 h-4 w-4" /> Add Patents
           </Btn>
         </div>
-        <div class="max-h-[calc(100vh-22.5rem)] overflow-y-auto px-1">
+        <div class="max-h-[calc(100vh-20rem)] overflow-y-auto px-1">
           <VTable
             v-bind="{
               data: patentList,
