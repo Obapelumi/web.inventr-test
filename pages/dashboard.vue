@@ -139,6 +139,19 @@ const stats = computed<Stat[]>(() => {
   const amountLeft = budgetSum - (meta.patentCostsAmountSum ?? 0)
   const percentageLeft = (amountLeft / budgetSum || 1) * 100
   return [
+    {
+      title: 'Amount Left',
+      value: toMoney({
+        amount: amountLeft,
+        currency: 'USD'
+      }),
+      type:
+        percentageLeft > 50
+          ? 'success'
+          : percentageLeft > 20
+          ? 'warning'
+          : 'error'
+    },
     { title: 'Number of Patents', value: meta.patentsCount },
     {
       title: 'Total Budget',
@@ -153,19 +166,6 @@ const stats = computed<Stat[]>(() => {
         amount: meta.patentCostsAmountSum ?? 0,
         currency: 'USD'
       })
-    },
-    {
-      title: 'Amount Left',
-      value: toMoney({
-        amount: amountLeft,
-        currency: 'USD'
-      }),
-      type:
-        percentageLeft > 50
-          ? 'success'
-          : percentageLeft > 20
-          ? 'warning'
-          : 'error'
     }
   ]
 })
