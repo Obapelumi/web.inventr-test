@@ -119,11 +119,9 @@ const {
   group: 'ip-portfolios'
 }))
 const companyId = auth?.value.user.company?.id
-const {
-  data: companyData,
-  // refresh: refreshCompany,
-  pending: companyPending
-} = useApiFetch<ApiShow<Company>>(`companies/${companyId}`, () => ({
+const { data: companyData, refresh: refreshCompany } = useApiFetch<
+  ApiShow<Company>
+>(`companies/${companyId}`, () => ({
   params: {
     'sums[]': ['patentCosts.amount', 'ipPortfolios.budget'],
     'counts[]': ['patents']
@@ -174,5 +172,6 @@ const stats = computed<Stat[]>(() => {
 const portfolioAdded = () => {
   openAddPortfolio.value = false
   refresh()
+  refreshCompany()
 }
 </script>
