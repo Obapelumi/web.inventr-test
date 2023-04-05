@@ -41,7 +41,14 @@ export const costTypeMap: Record<PatentCostType, string> = {
   attorney: 'Attorney Fees'
 }
 
-export type PatentCost = { id: string; type: PatentCostType; amount: number }
+export type PatentCost = {
+  id: string
+  type: PatentCostType
+  amount: number
+  transactionDate: string
+  renewalDate: string
+  isDue: boolean
+}
 
 export type PatentSearch = {
   hasMore: boolean

@@ -40,12 +40,30 @@
         }"
       >
         <template #header>
-          <TableHead class="h-10 px-4 pt-3 text-left">Type</TableHead>
+          <TableHead mobile class="h-10 px-4 pt-3 text-left">Type</TableHead>
+          <TableHead mobile class="h-10 px-4 pt-3 text-left"> Date </TableHead>
           <TableHead mobile class="px-4 pt-3 text-right">Amount</TableHead>
         </template>
         <template #default="{ row: cost }: TableRow<PatentCost>">
           <TableCell mobile class="text-xs">
             {{ costTypeMap[cost.type] }}
+          </TableCell>
+          <TableCell mobile class="text-xs">
+            <div
+              v-if="cost.transactionDate"
+              class="flex flex-col space-y-1 text-2xs"
+            >
+              <div class="flex space-x-2">
+                <span>Date of Expense: </span>
+                <span>{{ formatDate(cost.transactionDate, 'l') }}</span>
+              </div>
+              <div
+                :class="['flex space-x-2', cost.isDue ? 'text-red-500' : '']"
+              >
+                <span>Renews On: </span>
+                <span>{{ formatDate(cost.renewalDate, 'l') }}</span>
+              </div>
+            </div>
           </TableCell>
           <TableCell mobile class="text-right text-xs">
             {{ toMoney({ amount: cost.amount, currency: 'USD' }) }}

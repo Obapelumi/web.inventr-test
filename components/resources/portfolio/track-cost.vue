@@ -43,6 +43,14 @@
         required
         v-model="costForm.amount"
       />
+
+      <VInput
+        id="date"
+        label="Date of Expense"
+        type="date"
+        required
+        v-model="costForm.transactionDate"
+      />
       <div class="flex items-center justify-center space-x-2">
         <Btn class="Btn--primary w-full" v-bind="{ loading }"> SUBMIT </Btn>
       </div>
@@ -77,7 +85,8 @@ const costForm = reactive<{
   type: PatentCostType | null
   location: Location
   amount: number | null
-}>({ type: null, location: 'US', amount: null })
+  transactionDate: string | null
+}>({ type: null, location: 'US', amount: null, transactionDate: null })
 
 // methods
 const { addToast } = useToast()
