@@ -14,11 +14,11 @@
               v-for="(row, i) in data?.data"
               @click="onRowClick?.(row)"
               :class="[
-                'group mb-4 rounded-xl text-gray-600 transition-all odd:bg-gray-50 even:bg-white hover:-ml-3 hover:border-l-2 hover:border-gray-600 hover:bg-gray-100',
+                'group mb-4 rounded-xl text-gray-600 transition-all odd:bg-gray-50 even:bg-white hover:bg-gray-100',
                 onRowClick ? 'cursor-pointer' : ''
               ]"
             >
-              <slot v-bind="{ row, i }"> </slot>
+              <slot v-bind="{ row, i }"></slot>
             </tr>
           </tbody>
           <tbody v-else>

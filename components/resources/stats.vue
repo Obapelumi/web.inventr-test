@@ -2,15 +2,28 @@
   <div class="grid grid-cols-2 gap-3 md:grid-cols-4">
     <div
       v-for="stat in stats"
-      class="flex flex-col space-y-2 rounded-lg bg-white p-4 shadow-sm"
+      :class="[
+        'flex flex-col space-y-2 rounded-lg  p-4 shadow-sm',
+        stat.type === 'error'
+          ? 'bg-red-50 text-red-700'
+          : stat.type === 'success'
+          ? 'bg-green-50 text-green-700 shadow-green-100'
+          : stat.type === 'warning'
+          ? 'bg-yellow-50 text-yellow-500'
+          : 'bg-white text-gray-600'
+      ]"
     >
-      <h3 class="text-lg font-semibold text-gray-500">{{ stat.title }}</h3>
-      <span class="text-xl text-gray-700">{{ stat.value }}</span>
+      <h3 class="text-lg font-semibold">{{ stat.title }}</h3>
+      <span class="text-xl">{{ stat.value }}</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { Stat } from '~~/composables/resources/base'
+
 // defines
-defineProps<{ stats: { title: string; value: unknown }[] }>()
+defineProps<{
+  stats: Stat[]
+}>()
 </script>

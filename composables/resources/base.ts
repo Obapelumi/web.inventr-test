@@ -35,3 +35,9 @@ export const LONG_DATE_FORMAT = 'dddd, D MMMM YYYY'
 export const SHORT_DATE_FORMAT = 'D-MMM-YYYY'
 
 export const PLACEHOLDER_IMAGE = 'https://via.placeholder.com/150'
+
+export type Stat = {
+  title: string
+  value: unknown
+  type?: 'error' | 'warning' | 'success'
+}

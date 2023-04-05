@@ -100,6 +100,7 @@ import Icon from '~~/components/ui/icon.vue'
 import LoadingPage from '~~/components/ui/loading-page.vue'
 import SlideModal from '~~/components/ui/slide-modal.vue'
 import { ApiList, ApiShow } from '~~/composables/fetch'
+import { Stat } from '~~/composables/resources/base'
 import { IpPortfolio, Patent } from '~~/composables/resources/portfolio'
 
 // defines
@@ -128,9 +129,12 @@ const {
 const openAddPatents = ref(false)
 const [modalTitle, modalOpen] = useRouteModal('ip-portfolio', ['/patents/'])
 
-const stats = computed(() => {
+const stats = computed<Stat[]>(() => {
   const portfolioValue = portfolio.value
   if (!portfolioValue) return []
+  const amountLeft =
+    portfolioValue.budget - (portfolioValue.meta?.patentCostsAmountSum ?? 0)
+  const percentageLeft = (amountLeft / portfolioValue.budget) * 100
   return [
     { title: 'Number of Patents', value: portfolioValue.meta?.patentsCount },
     {
@@ -147,11 +151,15 @@ const stats = computed(() => {
     {
       title: 'Amount Left',
       value: toMoney({
-        amount:
-          portfolioValue.budget -
-          (portfolioValue.meta?.patentCostsAmountSum ?? 0),
+        amount: amountLeft,
         currency: 'USD'
-      })
+      }),
+      type:
+        percentageLeft > 50
+          ? 'success'
+          : percentageLeft > 20
+          ? 'warning'
+          : 'error'
     }
   ]
 })
