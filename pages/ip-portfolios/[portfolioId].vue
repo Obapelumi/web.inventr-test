@@ -123,7 +123,7 @@ const {
   refresh: refreshPatents,
   pending: patentsPending
 } = useApiFetch<ApiList<Patent>>('patents', () => ({
-  params: { ipPortfolioId: portfolioId, 'sums[]': ['costs.amount'] },
+  params: { 'ipPortfolioIds[]': [portfolioId], 'sums[]': ['costs.amount'] },
   group: `patents/${portfolioId}`
 }))
 const openAddPatents = ref(false)
