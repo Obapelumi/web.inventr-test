@@ -1,6 +1,6 @@
 <template>
   <PopUp
-    v-bind="{ open, title: 'Create Portfolio', showX: true }"
+    v-bind="{ open, title: 'Track Cost', showX: true }"
     @close="emit('canceled')"
   >
     <form
