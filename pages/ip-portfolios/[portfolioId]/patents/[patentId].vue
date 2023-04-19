@@ -91,7 +91,6 @@
 
 <script setup lang="ts">
 import LoadingPage from '~~/components/ui/loading-page.vue'
-import ModalTitle from '~~/components/ui/modal-title.vue'
 import ErrorPage from '~~/components/ui/error-page.vue'
 import { ApiShow } from '~~/composables/fetch'
 import { Patent, PatentCost } from '~~/composables/resources/portfolio'

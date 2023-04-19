@@ -25,6 +25,7 @@
 <script setup lang="ts">
 import InputError from './input-error.vue'
 import DragDropContainer from '../ui/drag-drop-container.vue'
+import { f } from 'ohmyfetch/dist/error-65d5de49'
 
 // defines
 const props = defineProps<{
@@ -43,8 +44,10 @@ const error = ref()
 const handleDrop = (e: DragEvent) => {
   e.preventDefault()
   e.stopPropagation()
-  const file = e.dataTransfer.files && e.dataTransfer.files[0]
-  handleFile(file)
+  const file = e.dataTransfer?.files && e.dataTransfer.files[0]
+  if (file) {
+    handleFile(file)
+  }
 }
 const handleInput = (e: Event) => {
   const currentTarget = e.currentTarget as HTMLInputElement
@@ -57,7 +60,7 @@ const handleFile = (file: File) => {
   fileUrl.value = URL.createObjectURL(file)
   emit('update:modelValue', { file, fileUrl: fileUrl.value })
 }
-const onInvalid = (e) => (error.value = validateInput(e))
+const onInvalid = (e: any) => (error.value = validateInput(e))
 
 // watchers
 watchEffect(() => {
