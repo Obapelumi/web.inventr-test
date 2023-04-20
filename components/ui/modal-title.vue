@@ -2,9 +2,9 @@
   <TeleportWrapper to="#slideModalHeader">
     <Title>{{ title }}</Title>
     <div class="flex items-center space-x-3">
-      <h3 class="text-xl font-semibold capitalize tracking-wide max-w-md text-gray-600">
+      <h2 class="text-xl font-semibold capitalize tracking-wide max-w-md text-gray-600">
         {{ title }}
-      </h3>
+      </h2>
       <slot></slot>
     </div>
   </TeleportWrapper>

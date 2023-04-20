@@ -4,7 +4,7 @@
       <table v-if="!isEmpty" class="min-w-full">
         <thead
           v-if="!pending || !data"
-          class="rounded-t-lg text-sm font-normal text-gray-400"
+          class="rounded-t-lg text-sm font-normal text-gray-600"
         >
           <slot name="header"></slot>
         </thead>

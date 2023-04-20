@@ -3,13 +3,17 @@
     <div class="flex h-full flex-col" v-if="auth">
       <div class="flex items-center justify-between p-4">
         <div class="flex items-center space-x-4">
-          <NuxtLink class="cursor-pointer" to="/dashboard">
+          <NuxtLink
+            class="cursor-pointer"
+            to="/dashboard"
+            aria-label="Dashboard Home"
+          >
             <Logo class="h-12" />
           </NuxtLink>
         </div>
         <div class="flex items-center space-x-4">
           <slot name="rightHeader"></slot>
-          <DropDown :items="profileItems" id="title">
+          <DropDown :items="profileItems" id="title" label="Avatar menu">
             <Avatar
               :alt="auth.user.name || 'user image'"
               class="h-12 w-12 cursor-pointer rounded-full"

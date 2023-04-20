@@ -1,6 +1,6 @@
 <template>
   <Menu as="div" class="flex flex-col items-end">
-    <MenuButton as="div" v-slot="{ open }" class="flex items-center">
+    <MenuButton v-slot="{ open }" class="flex items-center" :aria-label="label">
       <div ref="reference">
         <slot v-bind="{ open }"></slot>
       </div>
@@ -38,7 +38,11 @@ import { NavItem } from '~~/composables/ui'
 import DropDownItem from './drop-down-item.vue'
 
 // defines
-const props = defineProps<{ items: NavItem[]; placement?: Placement }>()
+const props = defineProps<{
+  items: NavItem[]
+  placement?: Placement
+  label?: string
+}>()
 
 // refs
 const [reference, floating] = useFloating(props.placement || 'bottom-end')

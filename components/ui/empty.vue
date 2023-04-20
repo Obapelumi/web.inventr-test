@@ -45,7 +45,7 @@
       <circle cx="433.63626" cy="105.17383" r="12.18187" fill="#fff" />
     </svg>
     <slot>
-      <h3 class="text-gray-500">{{ message ?? 'No data yet' }}</h3>
+      <h2 class="text-gray-500">{{ message ?? 'No data yet' }}</h2>
       <Btn
         v-if="action"
         class="Btn Btn--primary Btn--sm"

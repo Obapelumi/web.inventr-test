@@ -2,7 +2,7 @@
   <PopUp v-bind="{ open, size: 'full', showX: true }" @close="emit('canceled')">
     <div class="mt-2 flex w-full flex-col rounded-xl bg-white text-left">
       <div class="w-full border-b py-3 text-center">
-        <h3 class="text-lg">Add Patents</h3>
+        <h2 class="text-lg">Add Patents</h2>
       </div>
       <div class="flex-col space-y-6 p-5">
         <div class="flex items-center space-x-3 text-sm text-gray-600">

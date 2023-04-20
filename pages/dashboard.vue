@@ -7,7 +7,7 @@
     >
       <Empty>
         <div class="flex flex-col justify-center space-y-5">
-          <h3 class="text-gray-600">No IP Portfolios Yet</h3>
+          <h2 class="text-gray-600">No IP Portfolios Yet</h2>
           <Btn class="Btn--primary Btn--sm" @click="openAddPortfolio = true">
             <Icon name="folder-plus" class="mr-2 h-4 w-4" /> Add Portfolio
           </Btn>
@@ -23,7 +23,7 @@
       <Stats v-if="stats.length > 0" v-bind="{ stats }" />
       <div class="flex flex-col space-y-3 rounded-lg bg-white p-4 shadow-sm">
         <div class="flex justify-between">
-          <h3 class="text-lg font-semibold text-gray-600">IP Portfolios</h3>
+          <h2 class="text-lg font-semibold text-gray-600">IP Portfolios</h2>
           <Btn class="Btn--primary Btn--sm" @click="openAddPortfolio = true">
             <Icon name="folder-plus" class="mr-2 h-4 w-4" /> Add Portfolio
           </Btn>

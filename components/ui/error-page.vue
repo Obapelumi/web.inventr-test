@@ -246,12 +246,12 @@
       />
     </svg>
     <slot>
-      <h3 class="max-w-sm text-gray-500">
+      <h2 class="max-w-sm text-gray-500">
         {{
           message ??
           'There was an error loading this page. Our team has been notified and are working on a fix'
         }}
-      </h3>
+      </h2>
     </slot>
   </div>
 </template>

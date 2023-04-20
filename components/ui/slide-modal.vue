@@ -38,9 +38,9 @@
             <slot name="title">
               <div id="slideModalHeader" class="contents">
                 <div class="contents" v-if="title">
-                  <h3 class="max-w-md text-xl font-semibold tracking-wide">
+                  <h2 class="max-w-md text-xl font-semibold tracking-wide">
                     {{ title }}
-                  </h3>
+                  </h2>
                   <Title>{{ title }} · Inventr</Title>
                 </div>
               </div>

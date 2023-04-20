@@ -13,7 +13,7 @@
           : 'bg-white text-gray-600'
       ]"
     >
-      <h3 class="text-lg font-semibold">{{ stat.title }}</h3>
+      <span class="text-lg font-semibold">{{ stat.title }}</span>
       <span class="text-xl">{{ stat.value }}</span>
     </div>
   </div>

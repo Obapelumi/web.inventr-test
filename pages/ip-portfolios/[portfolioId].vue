@@ -8,7 +8,7 @@
       <Stats v-bind="{ stats }" />
       <div class="flex flex-col space-y-3 rounded-lg bg-white p-4 shadow-sm">
         <div class="flex justify-between">
-          <h3 class="text-lg font-semibold text-gray-600">Patents</h3>
+          <h2 class="text-lg font-semibold text-gray-600">Patents</h2>
           <Btn
             v-if="patentList?.data.length"
             class="Btn--primary Btn--sm"
@@ -55,7 +55,7 @@
             <template #empty>
               <Empty>
                 <div class="flex flex-col justify-center space-y-5">
-                  <h3 class="text-gray-600">No Patents Yet</h3>
+                  <h2 class="text-gray-600">No Patents Yet</h2>
                   <Btn
                     class="Btn--primary Btn--sm"
                     @click="openAddPatents = true"
